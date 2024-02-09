@@ -1,0 +1,16 @@
+Проверка заданий
+
+python3 /home/vadim/my_pyneng_tasks/pyneng.py 1
+
+Ответы
+
+python3 /home/vadim/my_pyneng_tasks/pyneng.py 1 -a 
+
+Какие файлы готовим для GitHab
+
+git add answer_task_4_1.py task_4_1.py
+
+Отправляем
+
+git commit -m "comment"
+git push

@@ -25,10 +25,5 @@
 
 vlans = [10, 20, 30, 1, 2, 100, 10, 30, 3, 4, 10]
 
-vlans_sets = set(vlans)
-
-vlans_list = list(vlans_sets)
-
-result = sorted(vlans_list)
-
+result = sorted(set(vlans))
 print(result)

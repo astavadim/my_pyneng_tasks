@@ -24,21 +24,12 @@
 Это не значит, что задание сделано правильно, просто на данном этапе сложно иначе
 проверять результат.
 """
-
 ip = "192.168.3.1"
 
 octets = ip.split(".")
 
-ip_template = '''
+output = """
 {0:<10}{1:<10}{2:<10}{3:<10}
-{0:8b}  {1:8b}  {2:08b}  {3:08b}
-'''
+{0:08b}  {1:08b}  {2:08b}  {3:08b}"""
 
-print(ip_template.format(int(oc
-
-
-
-
-tets[0]), int(octets[1]), int(octets[2]), int(octets[3])))
-
-
+print(output.format(int(octets[0]), int(octets[1]), int(octets[2]), int(octets[3])))

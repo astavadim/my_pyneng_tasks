@@ -20,7 +20,6 @@ $ python task_5_1.py
 Все задания надо выполнять используя только пройденные темы. То есть эту задачу можно
 решить без использования условия if.
 """
-device = input('Input device name: ')
 
 london_co = {
     "r1": {
@@ -48,6 +47,6 @@ london_co = {
     },
 }
 
-# print(device)
+device = input("Введите имя устройства: ")
 
 print(london_co[device])

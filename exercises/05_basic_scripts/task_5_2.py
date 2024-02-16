@@ -30,3 +30,42 @@ Out[1]: '11111111111111111111111111110000'
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+
+#inp = '10.1.1.0/24'
+inp = input('Введите сеть в формате X.X.X.X/Y: ')
+
+inp1 = inp.split('/')
+
+net, mask = (inp1[0], inp1[1])
+
+net1 = net.split('.')
+
+oct1, oct2, oct3, oct4 = (int(net1[0]), int(net1[1]),int(net1[2]), int(net1[3]))
+
+mask = int(inp1[1])
+mask_b = '1'*mask + '0'*(32-mask)
+
+mask_1oct = int(mask_b[0:8], 2)
+
+mask_2oct = int(mask_b[8:16], 2)
+
+mask_3oct = int(mask_b[16:24], 2)
+
+mask_4oct = int(mask_b[24:32], 2)
+
+
+
+template = """
+Network:
+{0:<10}{1:<10}{2:<10}{3:<10}
+{0:0>8b}  {1:0>8b}  {2:0>8b}  {3:0>8b}
+
+Mask:
+/{8}
+{4:<10}{5:<10}{6:<10}{7:<10}
+{4:0>8b}  {5:0>8b}  {6:0>8b}  {7:0>8b}
+"""
+tp = template.format(oct1, oct2, oct3, oct4, mask_1oct, mask_2oct, mask_3oct, mask_4oct, mask)
+
+print(tp)
+

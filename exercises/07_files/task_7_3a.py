@@ -40,3 +40,28 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+list_words = []
+
+with open("CAM_table.txt") as f:
+    for line in f:
+        words = line.split()
+        if words and words[0].isdigit():
+            vlan, mac, _, interface = words
+            list_words.append([int(vlan), mac, interface])
+    #for vlan_list in list_words:
+        #for vl in vlan_list:
+            #if vl.isdigit():
+                #int(vl)
+            list_words.sort()
+    for vlan, mac, interface in list_words:
+        print(f"{vlan:<9}{mac:20}{interface}")
+
+
+
+#with open('CAM_table.txt') as f:
+#    for line in f:
+#        line_list = line.split()
+#        for word in line_list:
+#            if word.isdigit():
+#                vlan, mac, intf = line_list[0], line_list[1], line_list[-1]
+#                print(f'{vlan:8} {mac:19} {intf}')

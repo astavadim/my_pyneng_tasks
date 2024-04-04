@@ -21,11 +21,9 @@
 
 """
 
-
-with open('CAM_table.txt') as f:
-    for line in f:
-        line_list = line.split()
-        for word in line_list:
-            if word.isdigit():
-                vlan, mac, intf = line_list[0], line_list[1], line_list[-1]
-                print(f'{vlan:8} {mac:19} {intf}')
+with open("CAM_table.txt") as conf:
+    for line in conf:
+        words = line.split()
+        if words and words[0].isdigit():
+            vlan, mac, _, interface = words
+            print(f"{vlan:9}{mac:20}{interface}")

@@ -78,14 +78,16 @@ def generate_access_config(intf_vlan_mapping, access_template):
     #intf_vlan_mapping_dict = intf_vlan_mapping
     for intf, value in intf_vlan_mapping.items():
         line_intf = (f"interface {intf}")
-        return (line_intf)
         print (line_intf)
-    for command in access_template:
-        if command.endswith("vlan"):
-            line_vlan = (f'{command} {value}')
-            return (line_vlan)
-        else:
-            line = (f' {command}')
-            return (line)
+        for command in access_template:
+            if command.endswith("vlan"):
+                line_vlan = (f' {command} {value}')
+                print(line_vlan)
+                #print(f' {command} {value}')
+                #return (line_vlan)
+            else:
+                line = (f' {command}')
+                print(line)
+    return (line_intf, line_vlan, line)
 
-def generate_access_config(intf_vlan_mapping, access_template)
+generate_access_config(access_config, access_mode_template)

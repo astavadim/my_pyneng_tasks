@@ -68,19 +68,14 @@ def ignore_command(command, ignore):
 
 def convert_config_to_dict(config_filename):
     config_dict = {}
-    with open(config_filename, "r") as f:
+    with open(config_filename) as f:
         for line in f:
             line = line.rstrip()
-            if not (line.startswith("!") or ignore_command(line, ignore)):
+            if line and not (line.startswith("!") or ignore_command(line, ignore)):
                 if line[0].isalnum():
-                    command = line
-                    config_dict[command] = []
+                    section = line
+                    config_dict[section] = []
                 else:
-                    config_dict[command].append(line.strip())
-#print(config_dict)
-
+                    config_dict[section].append(line.strip())
     return config_dict
-
-
-#convert_config_to_dict("config_sw1.txt")
 print(convert_config_to_dict('config_sw1.txt'))

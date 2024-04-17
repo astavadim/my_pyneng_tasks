@@ -27,32 +27,24 @@
 """
 
 def get_int_vlan_map(config_filename):
-
-    access = {}
-    trunk = {}
-
-    with open(config_filename, "r") as f:
+    access_port_dict = {}
+    trunk_port_dict = {}
+    with open(config_filename) as f:
         for line in f:
-            if line.startswith("interface Fast"):
-                line_list = line.split()
-                intf = line_list[-1]
-                access[intf] = 1
+            if line.startswith("interface FastEthernet"):
+                current_interface = line.split()[-1]
+                # Сразу указываем, что интерфейсу
+                # соответствует 1 влан в access_port_dict
+                access_port_dict[current_interface] = 1
             elif "switchport access vlan" in line:
-                line_list = line.split()
-                vlan = line_list [-1]
-                access[intf] = int(vlan)
+                # если нашлось другое значение VLAN,
+                # оно перепишет предыдущее соответствие
+                access_port_dict[current_interface] = int(line.split()[-1])
             elif "switchport trunk allowed vlan" in line:
-                #line_list = line.split()
-                #vlans = line_list[-1].split(',')
-                #vlans_int = []
-                #for vl in vlans:
-                #    vlans_int.append(int(vl))
-                #trunk[intf] = vlans_int
-                trunk[intf] = [int(vl) for vl in line.split()[-1].split(',')]
-                del access[intf]
-            #elif "switchport mode access" in line:
-            #
-    access[intf] = 1
-    return (access, trunk)
+                vlans = [int(i) for i in line.split()[-1].split(",")]
+                trunk_port_dict[current_interface] = vlans
+                # если встретилась команда trunk allowed vlan
+                # надо удалить интерфейс из словаря access_port_dict
+                del access_port_dict[current_interface]
+    return access_port_dict, trunk_port_dict
 
-print(get_int_vlan_map('config_sw2.txt'))

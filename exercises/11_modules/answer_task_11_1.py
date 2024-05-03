@@ -43,31 +43,19 @@ def parse_cdp_neighbors(command_output):
     и с файлами и с выводом с оборудования.
     Плюс учимся работать с таким выводом.
     """
-    conn = {}
-    f_list = command_output.split('\n')
-    #print(f_list)
-    for line in f_list:
+    result = {}
+    for line in command_output.split("\n"):
         line = line.strip()
         columns = line.split()
-        #print(columns)
-        if '>' in line:
-            hostname = line.split('>')[0]
-        elif len(columns) >= 6 and columns[3].isdigit():
-            r_dev, l_int, l_n_int, *other, r_int, r_n_int = columns
-            #print(columns)
-            conn[(hostname, l_int+l_n_int)] = (r_dev, r_int+r_n_int )
-    return conn
-            #print(hostname)
-    #for word in f_list:
-    #    if '>' in word:
-    #        dev_loc = word[0:3].split()
-    #        print(dev_loc)
-    #return f_list
-    #for word in command_output:
-
+        if ">" in line:
+            hostname = line.split(">")[0]
+        # 3 индекс это столбец holdtime - там всегда число
+        elif len(columns) >= 5 and columns[3].isdigit():
+            r_host, l_int, l_int_num, *other, r_int, r_int_num = columns
+            result[(hostname, l_int + l_int_num)] = (r_host, r_int + r_int_num)
+    return result
 
 
 if __name__ == "__main__":
     with open("sh_cdp_n_sw1.txt") as f:
         print(parse_cdp_neighbors(f.read()))
-
